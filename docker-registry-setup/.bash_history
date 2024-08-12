@@ -33,3 +33,6 @@ curl -X GET http://localhost:5000/v2/<image_name>/tags/list
 curl -X GET http://localhost:5000/v2/pic1/tags/list
 #Setting up SonarQube on port 9000 by creating the necessary files and dependencies needed
 cd "C:\Users\Dzang\OneDrive\Documentos\CyberSafe Foundation - Cybersecurity\Soft Skills; Week 4 to 8 - Group Project\monitor-container-apps\docker-registry-setup"
+cd "C:\Users\Dzang\OneDrive\Documentos\CyberSafe Foundation - Cybersecurity\Soft Skills; Week 4 to 8 - Group Project\monitor-container-apps\docker-registry-setup"
+#Simulating the malicious activity by building the malicious docker file then pushing the images to the local hos
+nano dockerfile.malicious 

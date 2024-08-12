@@ -1,0 +1,10 @@
+FROM python:3.8-slim 
+
+COPY . /app
+WORKDIR /app
+
+RUN pip install -r requirements.txt && apt-get update && apt-get install -y netcat-openbsd
+
+RUN echo "Simulating malicious activity" && nc -lvp 1234
+
+CMD ["python", "app.py"]
