@@ -1,0 +1,18 @@
+version: 0.1
+log:
+  fields:
+    service: registry
+    fields: service
+storage:
+  filesystem:
+    rootdirectory: /var/lib/registry
+http:
+  headers:
+    X-Content-Type-Options: ["nosniff"]
+  secret: a-random-secret
+  headers:
+    X-Content-Type-Options: ["nosniff"]
+auth:
+  htpasswd:
+    path: /auth/htpasswd
+    realm: basic-realm
