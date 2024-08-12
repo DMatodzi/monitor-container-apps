@@ -36,3 +36,13 @@ cd "C:\Users\Dzang\OneDrive\Documentos\CyberSafe Foundation - Cybersecurity\Soft
 cd "C:\Users\Dzang\OneDrive\Documentos\CyberSafe Foundation - Cybersecurity\Soft Skills; Week 4 to 8 - Group Project\monitor-container-apps\docker-registry-setup"
 #Simulating the malicious activity by building the malicious docker file then pushing the images to the local hos
 nano dockerfile.malicious 
+nano dockerfile.malicious
+docker build -t pic2:malicious -f Dockerfile.malicious .
+docker build -t pic2:malicious -f dockerfile.malicious .
+docker tag pic2:malicious localhost:5000/pic1:secure #tagging the malicious image to replace the legitimate one
+docker push localhost:5000/pic1:secure #pushing the malicious image to the private registry
+docker push localhost:5000/pic1:secure #pushing the malicious image to the private registry
+docker run -d -p 6000:5000 --name my-malicious-app-container localhost:5000/pic1:secure  #Running the malicious container 
+docker ps
+#Setting up traffic monitoring using wireshark
+sudo apt-get update
