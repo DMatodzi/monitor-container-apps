@@ -64,3 +64,17 @@ docker-compose up -d
 #Setting up Owasp zap for DAST Scanning
 docker run -u zap -p 8080:8080 -i owasp/zap2docker-stable zap-webswing.sh
 docker-compose up -d
+git status
+git pull origin main
+git status
+git add
+git add ../.github/workflows/main.yml
+git status
+git comit -m "update docker build phase"
+git commit -m "update docker build phase"
+git push origin main
+git add ../.github/workflows/main.yml
+git commit -m "update docker build phase"
+git push origin main
+clear
+ls 
