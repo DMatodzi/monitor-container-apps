@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  flask-app1:
+    image: localhost:5000/pic1:secure
+    ports:
+      - "5001:5000"
+    networks:
+      - mynetwork
+
+  flask-app2:
+    image: localhost:5000/pic1:secure
+    ports:
+      - "5002:5000"
+    networks:
+      - mynetwork
+
+  malicious-app1:
+    image: localhost:5000/pic2:malicious
+    ports:
+      - "6001:5000"
+    networks:
+      - mynetwork
+
+  malicious-app2:
+    image: localhost:5000/pic2:malicious
+    ports:
+      - "6002:5000"
+    networks:
+      - mynetwork
+
+  zap:
+    image: owasp/zap2docker-stable
+    ports:
+      - "8080:8080"
+    command: zap-webswing.sh
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
