@@ -23,7 +23,7 @@ jobs:
 
     - name: Build and push Docker images
       run: |
-        docker build -t pic1:secure -f "C:\Users\Dzang\OneDrive\Documentos\CyberSafe Foundation - Cybersecurity\Soft Skills; Week 4 to 8 - Group Project\monitor-container-apps\docker-registry-setup\dockerfile"  .
+        docker build -t pic1:secure -f "C:/Users/Dzang/OneDrive/Documentos/CyberSafe Foundation - Cybersecurity/Soft Skills; Week 4 to 8 - Group Project/monitor-container-apps/docker-registry-setup/dockerfile"  .
         docker tag pic1:secure ${{ secrets.DOCKER_USERNAME }}/pic1:secure
         docker push ${{ secrets.DOCKER_USERNAME }}/pic1:secure
 
