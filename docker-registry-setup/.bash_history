@@ -63,3 +63,4 @@ docker-compose up -d
 #Fix errors on Owasp-zap image
 #Setting up Owasp zap for DAST Scanning
 docker run -u zap -p 8080:8080 -i owasp/zap2docker-stable zap-webswing.sh
+docker-compose up -d
