@@ -58,3 +58,8 @@ docker tag pic2:malicious localhost:5000/pic2:malicious  #tagging and pushing ma
 docker push localhost:5000/pic2:malicious 
 docker rmi localhost:5000/pic2:malicious #deleting malicious image locally
 docker push localhost:5000/pic1:secure #pushing the secure image agin
+#Running docker containers
+docker-compose up -d
+#Fix errors on Owasp-zap image
+#Setting up Owasp zap for DAST Scanning
+docker run -u zap -p 8080:8080 -i owasp/zap2docker-stable zap-webswing.sh
