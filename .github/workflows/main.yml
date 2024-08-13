@@ -25,7 +25,7 @@ jobs:
       run: |
        ls -lr  
        ls docker-registry-setup
-       docker build /docker-registry-setup/dockerfile -t pic1:secure 
+       docker build -f /docker-registry-setup/dockerfile -t pic1:secure .
        docker tag pic1:secure ${{ secrets.DOCKER_USERNAME }}/pic1:secure
        docker push ${{ secrets.DOCKER_USERNAME }}/pic1:secure
       
