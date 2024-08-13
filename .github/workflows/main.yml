@@ -34,8 +34,17 @@ jobs:
         docker network create sonarnet 
         docker run -d --name sonar-postgres --network sonarnet -p 5432:5432 -e POSTGRES_USER=sonar -e POSTGRES_PASSWORD=sonar -e POSTGRES_DB=sonar postgres:latest
         docker run -d --name sonarqube --network sonarnet -p 9000:9000 -e SONAR_JDBC_URL=jdbc:postgresql://sonar-postgres/sonar -e SONAR_JDBC_USERNAME=sonar -e SONAR_JDBC_PASSWORD=sonar sonarqube:latest
-        sleep 60  # Wait for SonarQube to start
-   
+        sleep 120  # Wait for SonarQube to start
+
+    - name: Check Docker network
+      run: docker network ls
+
+    - name: Check SonarQube and PostgreSQL status and logs
+      run: |
+        docker ps
+        docker logs sonarqube
+        docker logs sonar-postgres   
+
     - name: SCA Scan with SonarQube
       run: |
          docker run --rm -e SONAR_HOST_URL="${{ secrets.SONAR_HOST_URL }}" -e SONAR_LOGIN="${{ secrets.SONAR_TOKEN }}" -v "$(pwd):/usr/src" sonarsource/sonar-scanner-cli -Dsonar.projectKey=mca -Dsonar.sources=. -Dsonar.language=python -Dsonar.docker.image=pic1:secure
