@@ -46,3 +46,5 @@ docker run -d -p 6000:5000 --name my-malicious-app-container localhost:5000/pic1
 docker ps
 #Setting up traffic monitoring using wireshark
 sudo apt-get update
+cd "C:\Users\Dzang\OneDrive\Documentos\CyberSafe Foundation - Cybersecurity\Soft Skills; Week 4 to 8 - Group Project\monitor-container-apps\docker-registry-setup"
+nano docker-compose.yml
