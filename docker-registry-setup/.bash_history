@@ -78,3 +78,5 @@ git commit -m "update docker build phase"
 git push origin main
 clear
 ls 
+cd "C:\Users\Dzang\OneDrive\Documentos\CyberSafe Foundation - Cybersecurity\Soft Skills; Week 4 to 8 - Group Project\monitor-container-apps\docker-registry-setup"
+pip install flask
