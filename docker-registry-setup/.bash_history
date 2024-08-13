@@ -48,3 +48,13 @@ docker ps
 sudo apt-get update
 cd "C:\Users\Dzang\OneDrive\Documentos\CyberSafe Foundation - Cybersecurity\Soft Skills; Week 4 to 8 - Group Project\monitor-container-apps\docker-registry-setup"
 nano docker-compose.yml
+#Putting the docjer-compose.yml file in the correct directory
+#Building and pushing docker images
+docker build -t pic2:malicious -f Dockerfile.malicious .
+docker build -t pic2:malicious -f dockerfile.malicious .
+docker tag pic1:secure localhost:5000/pic1:secure  #Tag secure image and push it
+docker push localhost:5000/pic1:secure 
+docker tag pic2:malicious localhost:5000/pic2:malicious  #tagging and pushing malicious image
+docker push localhost:5000/pic2:malicious 
+docker rmi localhost:5000/pic2:malicious #deleting malicious image locally
+docker push localhost:5000/pic1:secure #pushing the secure image agin
