@@ -45,6 +45,4 @@ jobs:
         target: 'https://www.zaproxy.org/'
         cmd_options: '-a'   
 
-    - name: DAST Scan with OWASP ZAP
-      run: |
-        docker run -t owasp/zap2docker-stable zap-full-scan.py -t http://my-flask-app-container:6000 -r report.html
+   
