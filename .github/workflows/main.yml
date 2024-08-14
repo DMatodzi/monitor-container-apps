@@ -33,6 +33,7 @@ jobs:
     - name: Set up SonarCloud
       uses: sonarsource/sonarcloud-github-action@v2.3.0
       with:
+        projectBaseDir: .
         args: >
           -Dsonar.organization=${{ secrets.SONARCLOUD_ORGANIZATION }}
           -Dsonar.projectKey=${{ secrets.SONARCLOUD_PROJECTKEY }}
