@@ -23,38 +23,23 @@ jobs:
 
     - name: Build and push Docker images
       run: |
-        ls -lr
         docker build -f docker-registry-setup/dockerfile -t pic1:secure docker-registry-setup
         docker tag pic1:secure ${{ secrets.DOCKER_USERNAME }}/pic1:secure
         docker push ${{ secrets.DOCKER_USERNAME }}/pic1:secure
-      
+        docker build -f docker-registry-setup/dockerfile.malicious -t pic2:malicious docker-registry-setup
+        docker tag pic2:malicious ${{ secrets.DOCKER_USERNAME }}/pic2:malicious
+        docker push ${{ secrets.DOCKER_USERNAME }}/pic2:malicious
 
-    - name: Start SonarQube
-      run: |
-        docker network create sonarnet 
-        docker run -d --name sonar-postgres --network sonarnet -p 5432:5432 -e POSTGRES_USER=sonar -e POSTGRES_PASSWORD=sonar -e POSTGRES_DB=sonar postgres:latest
-        docker run -d --name sonarqube --network sonarnet -p 9000:9000 -e SONAR_JDBC_URL=jdbc:postgresql://sonar-postgres/sonar -e SONAR_JDBC_USERNAME=sonar -e SONAR_JDBC_PASSWORD=sonar sonarqube:latest
-        sleep 120  # Wait for SonarQube to start
-
-    - name: Check Docker network
-      run: docker network ls
-
-    - name: Check SonarQube and PostgreSQL status and logs
-      run: |
-        docker ps
-        docker logs sonarqube
-        docker logs sonar-postgres   
-
-    - name: SCA Scan with SonarQube
-      run: |
-         docker run --rm -e SONAR_HOST_URL="${{ secrets.SONAR_HOST_URL }}" -e SONAR_LOGIN="${{ secrets.SONAR_TOKEN }}" -v "$(pwd):/usr/src" sonarsource/sonar-scanner-cli -Dsonar.projectKey=mca -Dsonar.sources=. -Dsonar.language=python -Dsonar.docker.image=pic1:secure
+    - name: Set up SonarCloud
+      uses: sonarsource/sonarcloud-github-action@v1.5
+      with:
+        args: >
+          -Dsonar.organization=${{ secrets.SONARCLOUD_ORGANIZATION }}
+          -Dsonar.projectKey=${{ secrets.SONARCLOUD_PROJECTKEY }}
+          -Dsonar.sources=.github/workflows,docker-registry-setup
+          -Dsonar.host.url=https://sonarcloud.io
+          -Dsonar.login=${{ secrets.SONARCLOUD_TOKEN }}
 
     - name: DAST Scan with OWASP ZAP
       run: |
-        docker run -t owasp/zap2docker-stable zap-full-scan.py -t http://localhost -r report.html
-
-    - name: Stop SonarQube and PostgreSQL
-      if: always()
-      run: |
-        docker stop sonarqube sonar-postgres
-        docker network rm sonarnet
+        docker run -t owasp/zap2docker-stable zap-full-scan.py -t http://my-flask-app-container:6000 -r report.html
