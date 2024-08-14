@@ -38,7 +38,7 @@ jobs:
           -Dsonar.projectKey=${{ secrets.SONARCLOUD_PROJECTKEY }}
           -Dsonar.sources=.github/workflows,docker-registry-setup
           -Dsonar.host.url=https://sonarcloud.io
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+          -Dsonar.login=${{ secrets.SONARCLOUD_TOKEN }}
 
     - name: DAST Scan with OWASP ZAP
       run: |
