@@ -26,9 +26,10 @@ jobs:
         docker build -f docker-registry-setup/dockerfile -t pic1:secure docker-registry-setup
         docker tag pic1:secure ${{ secrets.DOCKER_USERNAME }}/pic1:secure
         docker push ${{ secrets.DOCKER_USERNAME }}/pic1:secure
-        docker build -f docker-registry-setup/dockerfile.malicious -t pic2:malicious docker-registry-setup
-        docker tag pic2:malicious ${{ secrets.DOCKER_USERNAME }}/pic2:malicious
-        docker push ${{ secrets.DOCKER_USERNAME }}/pic2:malicious
+
+        #docker build -f docker-registry-setup/dockerfile.malicious -t pic2:malicious docker-registry-setup
+        #docker tag pic2:malicious ${{ secrets.DOCKER_USERNAME }}/pic2:malicious
+        #docker push ${{ secrets.DOCKER_USERNAME }}/pic2:malicious
     
     - name: ZAP Scan
       uses: zaproxy/action-baseline@v0.12.0
